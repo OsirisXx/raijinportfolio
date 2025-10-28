@@ -17,19 +17,19 @@ export default function Experience({ experiences }: ExperienceProps) {
 
   if (experiences.length === 0) {
     return (
-      <section id="experience" className="py-20 bg-gradient-to-br from-secondary to-primary">
+      <section id="experience" className="py-12 md:py-20 bg-gradient-to-br from-secondary to-primary">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold text-light mb-8">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-light mb-6 md:mb-8">
             My <span className="text-accent">Experience</span>
           </h2>
-          <p className="text-light/80 text-xl">No experience available yet.</p>
+          <p className="text-light/80 text-base md:text-xl">No experience available yet.</p>
         </div>
       </section>
     )
   }
 
   return (
-    <section id="experience" className="py-20 bg-gradient-to-br from-secondary to-primary relative overflow-hidden">
+    <section id="experience" className="py-12 md:py-20 bg-gradient-to-br from-secondary to-primary relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -43,12 +43,12 @@ export default function Experience({ experiences }: ExperienceProps) {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16 px-4"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-light mb-8">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-light mb-4 md:mb-8">
             My <span className="text-accent">Experience</span>
           </h2>
-          <p className="text-light/80 text-xl max-w-2xl mx-auto">
+          <p className="text-light/80 text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
             My professional journey and the experiences that have shaped my career.
           </p>
         </motion.div>
@@ -56,7 +56,7 @@ export default function Experience({ experiences }: ExperienceProps) {
         {/* Timeline */}
         <div className="relative max-w-4xl mx-auto">
           {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-accent/30"></div>
+          <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-1 h-full bg-accent/30"></div>
 
           {experiences.map((experience, index) => (
             <motion.div
@@ -65,37 +65,41 @@ export default function Experience({ experiences }: ExperienceProps) {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className={`relative flex items-center mb-16 ${
-                index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+              className={`relative flex items-center mb-8 md:mb-16 ${
+                index % 2 === 0 ? 'flex-row' : 'md:flex-row-reverse'
               }`}
             >
               {/* Timeline Dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-accent rounded-full border-4 border-light shadow-lg z-10"></div>
+              <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-5 h-5 md:w-6 md:h-6 bg-accent rounded-full border-4 border-light shadow-lg z-10"></div>
 
               {/* Content Card */}
-              <div className={`w-5/12 ${
-                index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'
+              <div className={`w-full md:w-5/12 pl-10 md:pl-0 ${
+                index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8 md:text-left'
               }`}>
                 <motion.div
-                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-shadow"
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-light font-bold text-lg">
+                  <div className={`flex items-center gap-3 mb-3 md:mb-4 ${
+                    index % 2 === 0 ? 'flex-row' : 'md:flex-row-reverse'
+                  }`}>
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-accent rounded-full flex items-center justify-center text-light font-bold text-base md:text-lg flex-shrink-0">
                       {experience.company[0]}
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-light">{experience.position}</h3>
-                      <p className="text-accent font-semibold">{experience.company}</p>
+                    <div className={`${index % 2 === 0 ? 'text-left' : 'md:text-right'}`}>
+                      <h3 className="text-lg md:text-xl font-bold text-light">{experience.position}</h3>
+                      <p className="text-accent font-semibold text-sm md:text-base">{experience.company}</p>
                     </div>
                   </div>
                   
-                  <p className="text-light/80 mb-4 leading-relaxed">
+                  <p className="text-light/80 mb-3 md:mb-4 leading-relaxed text-sm md:text-base">
                     {experience.description}
                   </p>
                   
-                  <div className="flex items-center gap-2 text-light/60 text-sm">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className={`flex items-center gap-2 text-light/60 text-xs md:text-sm ${
+                    index % 2 === 0 ? 'justify-start' : 'md:justify-end'
+                  }`}>
+                    <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     <span>
@@ -114,21 +118,21 @@ export default function Experience({ experiences }: ExperienceProps) {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-10 md:mt-16 px-4"
         >
-          <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-lg max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-light mb-4">Interested in Working Together?</h3>
-            <p className="text-light/80 mb-6">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-lg max-w-2xl mx-auto">
+            <h3 className="text-xl md:text-2xl font-bold text-light mb-3 md:mb-4">Interested in Working Together?</h3>
+            <p className="text-light/80 mb-5 md:mb-6 text-sm md:text-base">
               I'm always open to discussing new opportunities and exciting projects.
             </p>
             <motion.a
               href="#contact"
-              className="inline-flex items-center gap-2 bg-accent text-light px-8 py-4 rounded-full font-semibold hover:bg-accent/90 transition-colors"
+              className="inline-flex items-center gap-2 bg-accent text-light px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-accent/90 transition-colors text-sm md:text-base"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Get In Touch
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </motion.a>
