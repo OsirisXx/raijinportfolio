@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Fragment } from 'react'
+import { Fragment, useState, useRef, useEffect } from 'react'
 import { Project } from '@/lib/types'
 
 interface ProjectCarouselProps {
@@ -9,6 +9,11 @@ interface ProjectCarouselProps {
 }
 
 export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const dragStartX = useRef(0)
+  const cardsRef = useRef<HTMLDivElement>(null)
+
   if (projects.length === 0) {
     return (
       <section id="projects" className="py-20 bg-gradient-to-br from-secondary to-primary">
@@ -27,6 +32,45 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
     '-4deg', '8deg', '7deg', '-11deg', '-13deg', '17deg', '-20deg'
   ]
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(false)
+    dragStartX.current = e.clientX
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (dragStartX.current !== 0) {
+      const diff = Math.abs(e.clientX - dragStartX.current)
+      if (diff > 5) {
+        setIsDragging(true)
+      }
+    }
+  }
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (dragStartX.current !== 0) {
+      const diff = dragStartX.current - e.clientX
+      const threshold = 50
+
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0) {
+          setSelectedIndex((prev) => (prev + 1) % projects.length)
+        } else {
+          setSelectedIndex((prev) => (prev - 1 + projects.length) % projects.length)
+        }
+      }
+    }
+
+    dragStartX.current = 0
+    setIsDragging(false)
+  }
+
+  useEffect(() => {
+    const radio = document.getElementById(`radio-${selectedIndex + 1}`) as HTMLInputElement
+    if (radio) {
+      radio.checked = true
+    }
+  }, [selectedIndex])
+
   return (
     <section id="projects" className="py-20 bg-gradient-to-br from-secondary to-primary relative overflow-hidden">
       {/* Background Pattern */}
@@ -44,7 +88,14 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
           Here are some of my recent projects that showcase my skills and passion for development.
         </p>
         
-        <div className="cards">
+        <div 
+          className="cards"
+          ref={cardsRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
           {projects.map((project, index) => {
             const rotationAngle = rotationAngles[index % rotationAngles.length]
             const nextIndex = (index + 1) % projects.length
@@ -78,6 +129,21 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                     <span className="card-num">{index + 1}/{projects.length}</span>
                     <h2>{project.title}</h2>
                     <p>{project.description}</p>
+                    
+                    {/* Tech Stack */}
+                    {project.tech_stack && project.tech_stack.length > 0 && (
+                      <div className="tech-stack">
+                        <h4 className="tech-stack-title">Tech Stack:</h4>
+                        <div className="tech-stack-chips">
+                          {project.tech_stack.slice(0, 6).map((tech, techIndex) => (
+                            <span key={tech} className="tech-chip">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
                     <footer>
                       <label htmlFor={`radio-${prevIndex + 1}`} aria-label="Previous">&#10094;</label>
                       <label htmlFor={`radio-${nextIndex + 1}`} aria-label="Next">&#10095;</label>

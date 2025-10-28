@@ -109,6 +109,12 @@ input[type="radio"] {
   margin-inline: auto;
   display: grid;
   counter-reset: my-counter;
+  cursor: grab;
+  user-select: none;
+}
+
+.cards:active {
+  cursor: grabbing;
 }
 
 .card {
@@ -123,6 +129,7 @@ input[type="radio"] {
   grid-template-columns: var(--cards-grid-cols);
   grid-template-rows: var(--cards-grid-rows);
   gap: var(--cards-grid-gap);
+  pointer-events: none;
 }
 
 @media (min-width: 600px) {
@@ -250,6 +257,7 @@ input:checked + .card {
   position: relative;
   min-height: 400px;
   width: 400px;
+  padding-bottom: 60px;
 }
 
 @media (max-width: 600px) {
@@ -290,10 +298,8 @@ input:checked + .card {
   display: flex;
   justify-content: var(--cards-footer-justify);
   gap: 2rem;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  margin-top: 1rem;
+  pointer-events: auto;
 }
 
 .card-data > footer label {
@@ -336,5 +342,38 @@ input:checked + .card > .card-img {
     translate: -150% 0;
     --angle: 0deg;
   }
+}
+
+/* Tech Stack Styles */
+.tech-stack {
+  display: grid;
+  gap: 0.5rem;
+  opacity: var(--data-opacity, 0);
+  transition: opacity var(--duration) ease-in-out;
+  transition-delay: var(--data-delay, 0ms);
+}
+
+.tech-stack-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #D3DAD9;
+  margin: 0;
+}
+
+.tech-stack-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-chip {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: #D3DAD9;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 

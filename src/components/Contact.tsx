@@ -3,20 +3,13 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Profile } from '@/lib/types'
-import { Mail, Phone, MapPin, Send, Copy, Check } from 'lucide-react'
+import { Mail, MapPin, Copy, Check } from 'lucide-react'
 
 interface ContactProps {
   profile: Profile
 }
 
 export default function Contact({ profile }: ContactProps) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [emailCopied, setEmailCopied] = useState(false)
 
   const copyEmailToClipboard = async () => {
@@ -40,39 +33,6 @@ export default function Contact({ profile }: ContactProps) {
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      if (response.ok) {
-        setSubmitStatus('success')
-        setFormData({ name: '', email: '', message: '' })
-      } else {
-        setSubmitStatus('error')
-      }
-    } catch (error) {
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
-
   return (
     <section id="contact" className="py-20 bg-light">
       <div className="container mx-auto px-6">
@@ -91,7 +51,7 @@ export default function Contact({ profile }: ContactProps) {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -101,10 +61,9 @@ export default function Contact({ profile }: ContactProps) {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold text-primary mb-6">Let's Connect</h3>
-              <p className="text-primary/80 text-lg mb-8">
-                I'm always interested in new opportunities and exciting projects. 
-                Feel free to reach out if you'd like to work together!
+              <h3 className="text-2xl font-bold text-primary mb-6 text-center">Let's Connect</h3>
+              <p className="text-primary/80 text-lg mb-8 text-center leading-relaxed">
+                I'm always excited to connect with fellow creators, potential collaborators, and anyone with an interesting project idea! Whether you're looking to build something amazing, need help with development, or just want to chat about technology, I'd love to hear from you. I'm most active on TikTok and Facebook, and I typically reply instantly via social media and emails. Let's bring your ideas to life together!
               </p>
             </div>
 
@@ -175,22 +134,42 @@ export default function Contact({ profile }: ContactProps) {
                 </motion.a>
               )}
 
+              <motion.a
+                href="https://www.tiktok.com/@theonlyraijin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 bg-white/50 backdrop-blur-sm rounded-2xl hover:bg-white/70 transition-colors"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-semibold text-primary">TikTok</p>
+                  <p className="text-primary/80">@theonlyraijin</p>
+                </div>
+              </motion.a>
+
               <motion.div
                 className="flex items-center gap-4 p-4 bg-white/50 backdrop-blur-sm rounded-2xl"
                 whileHover={{ scale: 1.02 }}
               >
-                <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-light">
-                  <Phone className="w-6 h-6" />
+                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
                 </div>
                 <div>
                   <p className="font-semibold text-primary">Response Time</p>
-                  <p className="text-primary/80">Usually within 24 hours</p>
+                  <p className="text-primary/80">Instant replies on social media & email</p>
                 </div>
               </motion.div>
             </div>
 
             {/* Social Links */}
-            <div className="flex gap-4">
+            <div className="flex justify-center gap-4">
               {profile.github && (
                 <motion.a
                   href={profile.github}
@@ -221,108 +200,6 @@ export default function Contact({ profile }: ContactProps) {
                 </motion.a>
               )}
             </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 shadow-lg"
-          >
-            <h3 className="text-2xl font-bold text-primary mb-6">Send a Message</h3>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-primary mb-2">
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-white/70 border border-primary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors"
-                  placeholder="Your name"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-primary mb-2">
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-white/70 border border-primary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-primary mb-2">
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 bg-white/70 border border-primary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors resize-none"
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 bg-accent text-light px-6 py-4 rounded-xl font-semibold hover:bg-accent/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-light border-t-transparent rounded-full animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    Send Message
-                  </>
-                )}
-              </motion.button>
-
-              {/* Status Messages */}
-              {submitStatus === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-green-100 text-green-800 rounded-xl"
-                >
-                  Thank you! Your message has been sent successfully.
-                </motion.div>
-              )}
-
-              {submitStatus === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-red-100 text-red-800 rounded-xl"
-                >
-                  Sorry, there was an error sending your message. Please try again.
-                </motion.div>
-              )}
-            </form>
           </motion.div>
         </div>
       </div>
