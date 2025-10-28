@@ -67,8 +67,8 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                       className="card-img" 
                       src={project.image_url} 
                       alt={project.title}
-                      width={200}
-                      height={200}
+                      width={260}
+                      height={260}
                     />
                   ) : (
                     <div className="card-img placeholder-img">🚀</div>
