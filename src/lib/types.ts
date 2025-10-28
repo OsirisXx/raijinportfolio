@@ -6,6 +6,9 @@ export interface Profile {
   profile_image_url?: string
   resume_url?: string
   email?: string
+  github?: string
+  linkedin?: string
+  twitter?: string
   facebook?: string
   location?: string
   created_at: string
