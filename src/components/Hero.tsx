@@ -68,7 +68,7 @@ export default function Hero({ profile }: HeroProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-2xl lg:text-3xl text-secondary mb-8 min-h-[3rem] flex items-center"
+              className="text-2xl lg:text-3xl text-secondary mb-8 min-h-[3rem] flex items-center justify-center lg:justify-start"
             >
               <TypewriterTitle 
                 titles={['Software Engineer', 'Software Freelancer']}
