@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Fragment, useState, useRef, useEffect } from 'react'
+import { Fragment, useState, useRef, useEffect, useCallback } from 'react'
 import { Project } from '@/lib/types'
 
 interface ProjectCarouselProps {
@@ -70,6 +70,12 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
       radio.checked = true
     }
   }, [selectedIndex])
+
+  // Handle navigation without scrolling
+  const handleNavigation = useCallback((e: React.MouseEvent, targetIndex: number) => {
+    e.preventDefault()
+    setSelectedIndex(targetIndex)
+  }, [])
 
   return (
     <section id="projects" className="py-20 bg-gradient-to-br from-secondary to-primary relative overflow-hidden">
@@ -145,8 +151,22 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                     )}
                     
                     <footer>
-                      <label htmlFor={`radio-${prevIndex + 1}`} aria-label="Previous">&#10094;</label>
-                      <label htmlFor={`radio-${nextIndex + 1}`} aria-label="Next">&#10095;</label>
+                      <button 
+                        type="button"
+                        onClick={(e) => handleNavigation(e, prevIndex)} 
+                        aria-label="Previous"
+                        className="nav-btn"
+                      >
+                        &#10094;
+                      </button>
+                      <button 
+                        type="button"
+                        onClick={(e) => handleNavigation(e, nextIndex)} 
+                        aria-label="Next"
+                        className="nav-btn"
+                      >
+                        &#10095;
+                      </button>
                     </footer>
                   </div>
                 </article>

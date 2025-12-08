@@ -147,7 +147,7 @@ export default function Hero({ profile }: HeroProps) {
                 💻
               </motion.div>
               <motion.div
-                className="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-light font-bold text-lg"
+                className="absolute bottom-0 -left-4 w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-light font-bold text-lg md:-bottom-4"
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 2.5, repeat: Infinity }}
               >

@@ -35,3 +35,4 @@ INSERT INTO experiences (company, position, description, start_date, end_date, o
 'Mastered modern web technologies including Next.js, TypeScript, and advanced React patterns. Implemented complex state management with Redux and built scalable web applications with modern deployment practices.',
 '2024-07-01', NULL, 8);
 
+

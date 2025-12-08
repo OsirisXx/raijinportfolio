@@ -8,6 +8,9 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import { Profile, Project, Skill, Experience as ExperienceType } from '@/lib/types'
 
+// Revalidate data every 60 seconds to fetch latest from database
+export const revalidate = 60
+
 async function getData() {
   try {
     // Fetch all data in parallel
@@ -61,6 +64,7 @@ async function getData() {
 }
 
 export default async function Home() {
+  // Force dynamic rendering to always fetch fresh data
   const { profile, projects, skills, experiences } = await getData()
 
   return (

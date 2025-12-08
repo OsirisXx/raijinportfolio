@@ -92,14 +92,27 @@ export default function Skills({ skills }: SkillsProps) {
         >
           {/* Scrollable Skills Grid */}
           <div className="max-h-[600px] overflow-y-auto overflow-x-hidden pr-2 skills-scrollbar">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4">
+            <motion.div 
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                visible: {
+                  transition: {
+                    staggerChildren: 0.03
+                  }
+                }
+              }}
+            >
               {filteredSkills.map((skill, index) => (
                 <motion.div
                   key={skill.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.05 }}
-                  viewport={{ once: true }}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                  transition={{ duration: 0.3 }}
                   className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 hover:border-accent/20"
                   whileHover={{ y: -8, scale: 1.02 }}
                 >
@@ -137,7 +150,7 @@ export default function Skills({ skills }: SkillsProps) {
                           className="bg-gradient-to-r from-accent via-accent/80 to-secondary h-3 rounded-full shadow-sm"
                           initial={{ width: 0 }}
                           whileInView={{ width: getProficiencyWidth(skill.proficiency_level) }}
-                          transition={{ duration: 1.2, delay: index * 0.05, ease: "easeOut" }}
+                          transition={{ duration: 0.6, ease: "easeOut" }}
                           viewport={{ once: true }}
                         />
                       </div>
@@ -156,7 +169,7 @@ export default function Skills({ skills }: SkillsProps) {
                   </div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
           
           {/* Scroll indicator */}

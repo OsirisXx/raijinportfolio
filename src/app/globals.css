@@ -302,7 +302,7 @@ input:checked + .card {
   pointer-events: auto;
 }
 
-.card-data > footer label {
+.card-data > footer .nav-btn {
   margin-block-start: auto;
   cursor: pointer;
   pointer-events: var(--card-events, none);
@@ -316,10 +316,12 @@ input:checked + .card {
   aspect-ratio: 1/1;
   display: grid;
   place-content: center;
+  border: none;
+  font-size: 1rem;
 }
 
-input:checked:focus-visible + .card > .card-data > footer label,
-.card-data > footer label:hover {
+input:checked:focus-visible + .card > .card-data > footer .nav-btn,
+.card-data > footer .nav-btn:hover {
   --label-clr-txt: #FFF;
   --label-clr-bg: steelblue;
 }
