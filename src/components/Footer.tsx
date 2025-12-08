@@ -54,9 +54,9 @@ export default function Footer({ profile }: FooterProps) {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Brand Section */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.4 }}
               viewport={{ once: true }}
               className="lg:col-span-2"
             >
@@ -131,9 +131,9 @@ export default function Footer({ profile }: FooterProps) {
 
             {/* Quick Links */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
               viewport={{ once: true }}
             >
               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
@@ -168,9 +168,9 @@ export default function Footer({ profile }: FooterProps) {
 
             {/* Contact Info */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.4, delay: 0.15 }}
               viewport={{ once: true }}
             >
               <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
@@ -214,7 +214,7 @@ export default function Footer({ profile }: FooterProps) {
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.4 }}
               viewport={{ once: true }}
               className="text-light/80 text-center md:text-left"
             >

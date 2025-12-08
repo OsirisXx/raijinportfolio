@@ -54,17 +54,30 @@ export default function Experience({ experiences }: ExperienceProps) {
         </motion.div>
 
         {/* Timeline */}
-        <div className="relative max-w-4xl mx-auto">
+        <motion.div 
+          className="relative max-w-4xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+        >
           {/* Timeline Line */}
           <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-1 h-full bg-accent/30"></div>
 
           {experiences.map((experience, index) => (
             <motion.div
               key={experience.id}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
+              variants={{
+                hidden: { opacity: 0, x: index % 2 === 0 ? -30 : 30 },
+                visible: { opacity: 1, x: 0 }
+              }}
+              transition={{ duration: 0.4 }}
               className={`relative flex items-center mb-8 md:mb-16 ${
                 index % 2 === 0 ? 'flex-row' : 'md:flex-row-reverse'
               }`}
@@ -110,7 +123,7 @@ export default function Experience({ experiences }: ExperienceProps) {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Call to Action */}
         <motion.div

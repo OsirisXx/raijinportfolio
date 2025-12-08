@@ -64,10 +64,8 @@
   background: linear-gradient(180deg, #37353E 0%, #715A5A 100%);
 }
 
-/* Smooth animations */
-* {
-  transition: all 0.3s ease;
-}
+/* Smooth animations - only apply to specific properties for better performance */
+/* Removed global transition: all which causes performance issues */
 
 /* Focus styles */
 *:focus {

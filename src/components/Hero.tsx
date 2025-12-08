@@ -47,15 +47,15 @@ export default function Hero({ profile }: HeroProps) {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="text-center lg:text-left"
           >
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="text-5xl lg:text-7xl font-bold text-primary mb-6"
             >
               Hi, We're{' '}
@@ -65,9 +65,9 @@ export default function Hero({ profile }: HeroProps) {
             </motion.h1>
             
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="text-2xl lg:text-3xl text-secondary mb-8 min-h-[3rem] flex items-center justify-center lg:justify-start"
             >
               <TypewriterTitle 
@@ -77,18 +77,18 @@ export default function Hero({ profile }: HeroProps) {
             </motion.h2>
             
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               className="text-lg text-primary/80 mb-8 max-w-2xl"
             >
               {profile.bio}
             </motion.p>
             
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <motion.a
@@ -112,9 +112,9 @@ export default function Hero({ profile }: HeroProps) {
 
           {/* Profile Image */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="flex justify-center lg:justify-end"
           >
             <div className="relative">

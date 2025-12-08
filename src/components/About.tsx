@@ -27,13 +27,26 @@ export default function About({ profile }: AboutProps) {
               {profile.bio}
             </p>
             
-            <div className="grid md:grid-cols-2 gap-8 mt-12">
+            <motion.div 
+              className="grid md:grid-cols-2 gap-8 mt-12"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                visible: {
+                  transition: {
+                    staggerChildren: 0.15
+                  }
+                }
+              }}
+            >
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-lg"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.4 }}
+                className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <h3 className="text-2xl font-bold text-primary mb-4">My Journey</h3>
                 <p className="text-primary/80">
@@ -44,11 +57,12 @@ export default function About({ profile }: AboutProps) {
               </motion.div>
               
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-lg"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.4 }}
+                className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <h3 className="text-2xl font-bold text-primary mb-4">My Approach</h3>
                 <p className="text-primary/80">
@@ -56,13 +70,13 @@ export default function About({ profile }: AboutProps) {
                   I enjoy collaborating with teams and learning from others while sharing my own knowledge and experience.
                 </p>
               </motion.div>
-            </div>
+            </motion.div>
             
             {/* Social Links */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
               viewport={{ once: true }}
               className="flex justify-center gap-6 mt-12"
             >

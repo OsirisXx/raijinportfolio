@@ -37,9 +37,9 @@ export default function Contact({ profile }: ContactProps) {
     <section id="contact" className="py-20 bg-light">
       <div className="container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
@@ -54,10 +54,16 @@ export default function Contact({ profile }: ContactProps) {
         <div className="max-w-4xl mx-auto">
           {/* Contact Information */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.08
+                }
+              }
+            }}
             className="space-y-8"
           >
             <div>
@@ -68,9 +74,20 @@ export default function Contact({ profile }: ContactProps) {
             </div>
 
             {/* Contact Details */}
-            <div className="space-y-6">
+            <motion.div 
+              className="space-y-6"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1 }
+              }}
+            >
               {profile.email && (
                 <motion.button
+                  variants={{
+                    hidden: { opacity: 0, y: 15 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                  transition={{ duration: 0.3 }}
                   onClick={copyEmailToClipboard}
                   className="flex items-center gap-4 p-4 bg-white/50 backdrop-blur-sm rounded-2xl hover:bg-white/70 transition-colors w-full text-left cursor-pointer group"
                   whileHover={{ scale: 1.02 }}
@@ -101,6 +118,11 @@ export default function Contact({ profile }: ContactProps) {
 
               {profile.location && (
                 <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 15 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                  transition={{ duration: 0.3 }}
                   className="flex items-center gap-4 p-4 bg-white/50 backdrop-blur-sm rounded-2xl"
                   whileHover={{ scale: 1.02 }}
                 >
@@ -116,6 +138,11 @@ export default function Contact({ profile }: ContactProps) {
 
               {profile.facebook && (
                 <motion.a
+                  variants={{
+                    hidden: { opacity: 0, y: 15 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                  transition={{ duration: 0.3 }}
                   href={profile.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -135,6 +162,11 @@ export default function Contact({ profile }: ContactProps) {
               )}
 
               <motion.a
+                variants={{
+                  hidden: { opacity: 0, y: 15 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.3 }}
                 href="https://www.tiktok.com/@theonlyraijin"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -153,6 +185,11 @@ export default function Contact({ profile }: ContactProps) {
               </motion.a>
 
               <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 15 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.3 }}
                 className="flex items-center gap-4 p-4 bg-white/50 backdrop-blur-sm rounded-2xl"
                 whileHover={{ scale: 1.02 }}
               >
@@ -166,7 +203,7 @@ export default function Contact({ profile }: ContactProps) {
                   <p className="text-primary/80">Instant replies on social media & email</p>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
 
             {/* Social Links */}
             <div className="flex justify-center gap-4">
