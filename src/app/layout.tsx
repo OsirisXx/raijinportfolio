@@ -13,9 +13,12 @@ export const metadata: Metadata = {
   keywords: ["portfolio", "software developer", "web development", "react", "nextjs", "raijin tech"],
   authors: [{ name: "Raijin Tech Solutions" }],
   icons: {
-    icon: '/icon.svg',
-    shortcut: '/icon.svg',
-    apple: '/icon.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
   },
   openGraph: {
     title: "Raijin Tech Solutions - Software Developer",
